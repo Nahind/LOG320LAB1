@@ -11,19 +11,36 @@ public class AnagrammeApp {
 
     public static void main(String[] args) {
         Anagramme a = new Anagramme();
-        String dictFileName = "N=1000.txt";
+        String dictFileName = "N=4000.txt";
         String wordsFileName = "words.txt";
         String path = "src/assets/";
+        long startTime;
+        long endTime;
+        long durationBasic;
+        long durationSmart;
 
         List<ArrayList<Character>> testWords = a.fileToWordsList(new File(path + wordsFileName));
         List<ArrayList<Character>> dictWords = a.fileToWordsList(new File(path + dictFileName));
 
-        // Initial algorithme for finding anagramm
+        // Initial algorithm for finding anagramm
         System.out.println("Initial algorithme for finding anagramm");
+        // Start the timer to check method speed
+        startTime = System.nanoTime();
         a.findAnagrammsBasic(testWords, dictWords);
+        endTime = System.nanoTime();
+        durationBasic = ((endTime - startTime)/1000000);
 
-        // Modified algorithme for finding anagramm
-        System.out.println("Modified algorithme for finding anagramm");
+        // Modified algorithm for finding anagramm
+        System.out.println("\nModified algorithme for finding anagramm");
+        // Start the timer to check method speed
+        startTime = System.nanoTime();
         a.findAnagrammsSmart(testWords, dictWords);
+        endTime = System.nanoTime();
+        durationSmart = ((endTime - startTime)/1000000);
+
+
+        System.out.printf(
+                "\nThe basic method has taken %dms" +
+                "\nThe smart method has taken %dms\n", durationBasic, durationSmart);
     }
 }

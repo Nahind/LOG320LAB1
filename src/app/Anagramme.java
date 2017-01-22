@@ -42,10 +42,6 @@ public class Anagramme {
     }
 
     public void findAnagrammsBasic(List<ArrayList<Character>> testWords, List<ArrayList<Character>> dictWords) {
-
-        // Start the timer to check method speed
-        long startTime = System.nanoTime();
-
         int anagrammeCount;
 
         for (ArrayList<Character> testWord : testWords)
@@ -60,13 +56,6 @@ public class Anagramme {
             System.out.println("Il y a " + anagrammeCount + " anagrammes du mot " +
                     testWord.toString().replaceAll("[\\[\\], ]", ""));
         }
-
-        long endTime = System.nanoTime();
-
-        long duration = ((endTime - startTime)/1000000);  //divide by 1000000 to get milliseconds.
-
-        System.out.println("method duration = "+ duration +"ms");
-
     }
 
 
@@ -123,9 +112,6 @@ public class Anagramme {
 
     public void findAnagrammsSmart(List<ArrayList<Character>> testWords, List<ArrayList<Character>> dictWords) {
 
-        // Start the timer to check method speed
-        long startTime = System.nanoTime();
-
         Map<Character, Integer> map = loadPrimeMap();
         int anagrammeCount;
 
@@ -141,13 +127,6 @@ public class Anagramme {
             System.out.println("Il y a " + anagrammeCount + " anagrammes du mot " +
                     testWord.toString().replaceAll("[\\[\\], ]", ""));
         }
-
-        long endTime = System.nanoTime();
-
-        long duration = ((endTime - startTime)/1000000);  //divide by 1000000 to get milliseconds.
-
-        System.out.println("method duration = "+ duration +"ms");
-
     }
 
     private Map<Character, Integer> loadPrimeMap() {
