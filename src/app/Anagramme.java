@@ -10,7 +10,6 @@ import java.util.*;
  */
 public class Anagramme {
 
-
     public List<ArrayList<Character>> fileToWordsList(File file)
     {
         // Store the list of all words contained in the file
@@ -34,14 +33,15 @@ public class Anagramme {
         }
         catch (Exception e)
         {
-            System.err.format("Exception occurred trying to read '%s'.");
+            System.err.format("Exception occurred trying to read.");
             e.printStackTrace();
         }
 
         return wordsList;
     }
 
-    public void findAnagrammsBasic(List<ArrayList<Character>> testWords, List<ArrayList<Character>> dictWords) {
+    public void findAnagrammsBasic(List<ArrayList<Character>> testWords, List<ArrayList<Character>> dictWords)
+    {
         int anagrammeCount;
 
         for (ArrayList<Character> testWord : testWords)
@@ -58,8 +58,8 @@ public class Anagramme {
         }
     }
 
-
-    public boolean isAnagrammBasic(ArrayList<Character> chaine1, ArrayList<Character> chaine2) {
+    public boolean isAnagrammBasic(ArrayList<Character> chaine1, ArrayList<Character> chaine2)
+    {
         boolean found = false;
         chaine1 = (ArrayList<Character>) chaine1.clone();
         chaine2 = (ArrayList<Character>) chaine2.clone();
@@ -88,20 +88,18 @@ public class Anagramme {
         return found;
     }
 
-
-    private static boolean isAnagrammSmart(ArrayList<Character> a, ArrayList<Character> b, Map<Character, Integer> map) {
-        // Assign a prime number to each
-
-        int productA = map.get(a.get(0));
-        int productB = map.get(b.get(0));
+    private static boolean isAnagrammSmart(ArrayList<Character> a, ArrayList<Character> b, Map<Character, Integer> primeMap)
+    {
+        int productA = primeMap.get(a.get(0));
+        int productB = primeMap.get(b.get(0));
 
         if (a.size() != b.size()) {
             return false;
         }
         for (int i = 1; i < a.size(); i++) {
             try {
-                productA *= map.get(a.get(i));
-                productB *= map.get(b.get(i));
+                productA *= primeMap.get(a.get(i));
+                productB *= primeMap.get(b.get(i));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -110,9 +108,10 @@ public class Anagramme {
         return productA == productB;
     }
 
-    public void findAnagrammsSmart(List<ArrayList<Character>> testWords, List<ArrayList<Character>> dictWords) {
+    public void findAnagrammsSmart(List<ArrayList<Character>> testWords, List<ArrayList<Character>> dictWords)
+    {
 
-        Map<Character, Integer> map = loadPrimeMap();
+        Map<Character, Integer> primeMap = loadPrimeMap();
         int anagrammeCount;
 
         for (ArrayList<Character> testWord : testWords) {
@@ -120,7 +119,7 @@ public class Anagramme {
 
             for (ArrayList<Character> dictWord : dictWords) {
 
-                boolean result = isAnagrammSmart(testWord, dictWord, map);
+                boolean result = isAnagrammSmart(testWord, dictWord, primeMap);
                 if (result) anagrammeCount++;
             }
 
@@ -129,7 +128,8 @@ public class Anagramme {
         }
     }
 
-    private Map<Character, Integer> loadPrimeMap() {
+    private Map<Character, Integer> loadPrimeMap()
+    {
         HashMap<Character, Integer> map = new HashMap<>();
 
         map.put('a', 2);
@@ -171,7 +171,5 @@ public class Anagramme {
 
         return map;
     }
-
-
 
 }
